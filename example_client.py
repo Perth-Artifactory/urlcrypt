@@ -10,7 +10,7 @@ with open("config.json", mode="r") as f:
 
 
 print("This script will encrypt a URL using the public key.")
-data: dict = {"url": "https://google.com/", "teams": []}
+data: dict = {"url": "https://google.com/", "roles": []}
 pprint(data)
 
 print("Encrypting data...")

@@ -4,6 +4,7 @@ import base64
 
 
 def encrypt(data, config: dict | None = None):  # type: ignore
+    """Encrypt provided data and return a URL to decrypt it"""
 
     if config is None:
         # Load config

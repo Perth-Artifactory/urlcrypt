@@ -7,7 +7,7 @@ import json
 loaded_pubkey, loaded_privkey = keys.load_keys()
 
 # Data to be encrypted
-data = {"url": "https://google.com/", "teams": []}
+data = {"url": "https://google.com/", "roles": []}
 
 # Encrypt the data
 encrypted_data = client.encrypt(data, config={"public_base": "http://example.com"})

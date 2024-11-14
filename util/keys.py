@@ -7,12 +7,16 @@ from rsa.key import PrivateKey, PublicKey
 
 
 def generate_keys() -> tuple:
+    """Generate a public and private key pair"""
+    
     pubkey, privkey = rsa.newkeys(nbits=4096)
 
     return pubkey.save_pkcs1(format="PEM"), privkey.save_pkcs1(format="PEM")
 
 
 def save_keys(pubkey, privkey) -> bool:
+    """Save the public and private keys to files"""
+    
     with open("public.pem", mode="wb") as publicfile:
         publicfile.write(pubkey)
     with open("private.pem", mode="wb") as privatefile:
@@ -21,6 +25,8 @@ def save_keys(pubkey, privkey) -> bool:
 
 
 def load_keys() -> tuple[PublicKey, PrivateKey]:
+    """Load the public and private keys from files"""
+    
     with open("public.pem", mode="rb") as publicfile:
         pubkeydata = publicfile.read()
     with open("private.pem", mode="rb") as privatefile:
@@ -32,6 +38,7 @@ def load_keys() -> tuple[PublicKey, PrivateKey]:
 
 
 def load_public_key() -> PublicKey:
+    """Load just the public key from a file"""
     with open("public.pem", mode="rb") as publicfile:
         pubkeydata = publicfile.read()
     pubkey = rsa.PublicKey.load_pkcs1(pubkeydata)
@@ -40,6 +47,8 @@ def load_public_key() -> PublicKey:
 
 
 def decrypt(data: str) -> dict:
+    """Decrypt data that has been encrypted by urlcrypt"""
+    
     privkey = load_keys()[1]
 
     # Decode the base64 encoded data

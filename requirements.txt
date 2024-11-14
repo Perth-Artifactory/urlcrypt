@@ -1,2 +1,3 @@
 rsa
 flask
+python-jose[cryptography]
