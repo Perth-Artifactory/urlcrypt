@@ -1,6 +1,7 @@
 import json
 
 from flask import Flask, jsonify, request, redirect
+from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
 
 from util import keys
 
@@ -9,6 +10,7 @@ with open("config.json", mode="r") as f:
     config = json.load(f)
 
 app = Flask(__name__)
+jwt = JWTManager(app)
 
 
 @app.route("/decrypt", methods=["GET"])
@@ -39,4 +41,4 @@ def root_endpoint():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=config["port"])
+    app.run(debug=True, port=config["port"], host=config["host"])
