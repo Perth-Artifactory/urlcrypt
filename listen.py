@@ -7,7 +7,7 @@ from util import keys, teleport
 
 # Load config
 with open("config.json", mode="r") as f:
-    config = json.load(f)
+    config: dict = json.load(f)
 
 
 app = Flask(__name__)
@@ -26,7 +26,7 @@ def decrypt_endpoint():
     if teleport_jwt:
         payload = teleport.process_jwt(teleport_jwt, config)
         roles = payload.get("roles", [])
-        
+
     if decrypted_data.get("roles"):
         if decrypted_data["roles"] == []:
             decrypted_data["roles"] = ["any"]
@@ -50,14 +50,16 @@ def root_endpoint():
 
     if teleport_jwt:
         payload = teleport.process_jwt(teleport_jwt, config)
-        roles = payload.get("roles", [])
-        user = payload.get("username")
-        
-        teleport_data = f"User: {user}<br>Roles: {roles}"
-        
+        roles: list = payload.get("roles", [])
+        user: str | None = payload.get("username")
+
+        teleport_data: str = f"User: {user}<br>Roles: {roles}"
+
     else:
-        teleport_data = "No Teleport JWT found. Are you accessing this service through Teleport?"
-    
+        teleport_data = (
+            "No Teleport JWT found. Are you accessing this service through Teleport?"
+        )
+
     return f"This is a URL decryption service. Use the /decrypt endpoint to decrypt data.<br>{teleport_data}"
 
 
