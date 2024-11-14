@@ -39,8 +39,8 @@ def root_endpoint():
 
 
 if __name__ == "__main__":
-    if not config["port"]:
+    if not config.get("port"):
         config["port"] = 5000
-    if not config["host"]:
+    if not config.get("host"):
         config["host"] = "127.0.0.1"
     app.run(debug=True, port=config["port"], host=config["host"])
